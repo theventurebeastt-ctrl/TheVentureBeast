@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "The Venture Beast"
+version = "1.0.0"
+id = "artifacts/venture-beast"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24205
+
+[services.development]
+run = "pnpm --filter @workspace/venture-beast run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/venture-beast", "run", "build" ]
+publicDir = "artifacts/venture-beast/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24205"
+BASE_PATH = "/"
