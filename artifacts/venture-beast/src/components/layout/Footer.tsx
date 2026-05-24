@@ -16,9 +16,14 @@ export default function Footer() {
               We turn ad budgets into scalable revenue for D2C brands, B2B SaaS companies, and funded startups. 
               We don't sell promises, we sell proof.
             </p>
-            <a href="mailto:support@theventurebeast.com" className="text-white font-medium hover:text-primary transition-colors">
+            <a href="mailto:support@theventurebeast.com" className="text-white font-medium hover:text-primary transition-colors block mb-4">
               support@theventurebeast.com
             </a>
+            <p className="text-white/50 text-sm max-w-xs leading-relaxed">
+              E/6 186 Sector 6, Gomti Nagar,<br />
+              Lucknow, Malesemau,<br />
+              Uttar Pradesh 226010
+            </p>
           </div>
 
           <div>
