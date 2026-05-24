@@ -23,9 +23,30 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-32 bg-white text-zinc-950">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="max-w-3xl mb-20">
+    <section id="services" className="pt-16 md:pt-20 pb-32 bg-white text-zinc-950 relative overflow-hidden">
+      {/* Subtle Premium Grid Pattern */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0" 
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(9, 9, 11, 0.02) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(9, 9, 11, 0.02) 1px, transparent 1px)
+          `,
+          backgroundSize: "55px 55px",
+          maskImage: "radial-gradient(ellipse at top left, black 25%, transparent 65%)",
+          WebkitMaskImage: "radial-gradient(ellipse at top left, black 25%, transparent 65%)"
+        }}
+      />
+      
+      {/* Soft orange ambient bg glow */}
+      <div 
+        className="absolute top-0 right-0 w-[550px] h-[550px] pointer-events-none z-0" 
+        style={{
+          background: "radial-gradient(circle at center, rgba(249,115,22,0.045), transparent 70%)"
+        }}
+      />
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+        <div className="max-w-2xl mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +61,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-zinc-600 font-medium"
+            className="text-xl text-zinc-600 font-medium max-w-xl"
           >
             Generic agencies focus on impressions and clicks. We focus strictly on the metrics that matter to your P&L: CPL, CAC, ROAS, and Total Revenue.
           </motion.p>
@@ -82,6 +103,20 @@ export default function Services() {
           ))}
         </div>
       </div>
+      {/* Soft dark gradient transition to next section */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none z-0" 
+        style={{
+          background: "linear-gradient(to bottom, rgba(255, 255, 255, 0.83) 0%, #09090b 100%)"
+        }}
+      />
+      {/* Tiny orange glow at the junction */}
+      <div 
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[350px] h-[80px] pointer-events-none z-0" 
+        style={{
+          background: "radial-gradient(circle at center, rgba(255,115,0,0.06), transparent 70%)"
+        }}
+      />
     </section>
   );
 }

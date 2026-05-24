@@ -71,8 +71,15 @@ export default function Metrics() {
   ];
 
   return (
-    <section className="py-20 bg-zinc-950 border-y border-white/5 relative z-10">
-      <div className="container mx-auto px-6 md:px-12">
+    <section className="py-20 bg-zinc-950 border-y border-white/5 relative z-10 overflow-hidden md:overflow-visible">
+      {/* Subtle top orange glow overlapping both sections */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] pointer-events-none z-0" 
+        style={{
+          background: "radial-gradient(circle at center, rgba(255,115,0,0.18), transparent 70%)"
+        }}
+      />
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {metrics.map((metric, i) => (
             <motion.div 

@@ -3,19 +3,26 @@ import { motion } from "framer-motion";
 export default function Testimonials() {
   const testimonials = [
     {
-      quote: "The Venture Beast completely transformed our acquisition strategy. We were struggling with Meta Ads post-iOS 14, but they brought our CPA down by 40% and helped us scale to our highest revenue month ever.",
-      author: "Rahul S.",
-      role: "Founder, D2C Apparel Brand"
+      quote: "The Venture Beast played a crucial role in scaling Healsway across the UK, USA, Europe, and India. From building an international brand identity to driving 19,000+ website visits, they handled everything SEO, content, and ads. We grew from 0 to 22k organically follower Social Media and closed over ₹10 Lakhs in high-ticket orders with just ₹5K/week ad spend. Exceptional results!",
+      author: "Adiya Kumar",
+      role: "Founder, Healsway",
+      avatar: "/adiya.png",
+      theme: "dark"
     },
     {
-      quote: "Most agencies just report vanity metrics. These guys act like an extension of our growth team. They built a Google Ads funnel that consistently delivers high-intent enterprise leads.",
-      author: "Neha M.",
-      role: "CMO, B2B SaaS Platform"
+      quote: "Choosing The Venture Beast was one of the best decisions for our business. Their team built a complete marketing system from strategy to execution. We started seeing qualified leads within days, and their ad creatives stood out from the noise. Consistent communication, transparent reporting, and real ROI, highly recommended!",
+      author: "Kunal",
+      role: "Founder, Camcrush",
+      avatar: "/kunal.png",
+      theme: "gradient"
     }
   ];
 
   return (
-    <section className="py-32 bg-zinc-950 border-t border-white/5 relative overflow-hidden">
+    <section className="py-32 bg-[#09090b] border-t border-white/5 relative overflow-hidden">
+      {/* Texture overlay */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +35,7 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
           {testimonials.map((test, i) => (
             <motion.div 
               key={i}
@@ -36,17 +43,39 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 }}
-              className="bg-white/5 border border-white/10 p-10 rounded-2xl"
+              className={`p-8 md:p-10 rounded-2xl flex flex-col justify-between shadow-xl transition-all duration-300 ${
+                test.theme === "gradient" 
+                  ? "bg-gradient-to-br from-zinc-900 to-primary/20 text-white border border-primary/20 hover:border-primary/30 shadow-[0_0_30px_rgba(249,115,22,0.02)]" 
+                  : "bg-zinc-900/60 text-white border border-white/5 hover:border-primary/20"
+              }`}
             >
-              <svg className="w-10 h-10 text-primary mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="text-xl text-white/90 leading-relaxed mb-8 font-medium">
-                "{test.quote}"
-              </p>
               <div>
-                <p className="text-white font-bold text-lg">{test.author}</p>
-                <p className="text-primary text-sm font-semibold tracking-wide uppercase">{test.role}</p>
+                {/* 5 Stars */}
+                <div className="flex gap-1 mb-6 text-orange-500">
+                  {[...Array(5)].map((_, idx) => (
+                    <svg key={idx} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                  ))}
+                </div>
+
+                <p className="text-lg leading-relaxed mb-8 font-medium italic">
+                  "{test.quote}"
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-white/10 flex items-center gap-4">
+                <img 
+                  src={test.avatar} 
+                  alt={test.author} 
+                  className="w-12 h-12 rounded-full object-cover border border-white/10"
+                />
+                <div>
+                  <h4 className="text-white font-bold text-base sm:text-lg">{test.author}</h4>
+                  <p className="text-primary text-sm font-semibold">
+                    {test.role}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

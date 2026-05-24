@@ -2,18 +2,35 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Metrics from "@/components/sections/Metrics";
+import LogoTicker from "@/components/sections/LogoTicker";
 import Services from "@/components/sections/Services";
-import CaseStudies from "@/components/sections/CaseStudies";
-import Process from "@/components/sections/Process";
-import About from "@/components/sections/About";
-import Testimonials from "@/components/sections/Testimonials";
-import Contact from "@/components/sections/Contact";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
+
+// Lazy-load below-the-fold homepage sections to maximize Largest Contentful Paint (LCP) and PageSpeed scores
+const CaseStudies = lazy(() => import("@/components/sections/CaseStudies"));
+const Process = lazy(() => import("@/components/sections/Process"));
+const About = lazy(() => import("@/components/sections/About"));
+const Testimonials = lazy(() => import("@/components/sections/Testimonials"));
+const FAQ = lazy(() => import("@/components/sections/FAQ"));
+const Contact = lazy(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   // Force dark mode for the premium look
   useEffect(() => {
     document.documentElement.classList.add("dark");
+  }, []);
+
+  // Post-hydration smooth scroll for external page transitions
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 200);
+    }
   }, []);
 
   return (
@@ -22,18 +39,34 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Metrics />
+        <LogoTicker />
         <Services />
-        <CaseStudies />
-        <Process />
-        <About />
-        <Testimonials />
-        <Contact />
+        
+        {/* Suspense wrapper with minimal placeholder bounds to avoid Layout Shifts (CLS) */}
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <CaseStudies />
+        </Suspense>
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <Process />
+        </Suspense>
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <Testimonials />
+        </Suspense>
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <FAQ />
+        </Suspense>
+        <Suspense fallback={<div className="h-48 bg-zinc-950" />}>
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/917785957951"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-transform hover:scale-110"
@@ -53,8 +86,10 @@ export default function Home() {
       {/* Sticky Book a Call for Mobile */}
       <div className="md:hidden fixed bottom-0 left-0 w-full p-4 bg-background/80 backdrop-blur-md border-t border-border z-40">
         <a 
-          href="#contact" 
-          className="flex w-full items-center justify-center bg-primary text-primary-foreground font-semibold h-12 rounded-md shadow-lg"
+          href="https://cal.com/the-venture-beast-lxgerj/30min" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex w-full items-center justify-center bg-primary text-primary-foreground font-semibold h-12 rounded-full shadow-lg"
         >
           Book a Strategy Call
         </a>

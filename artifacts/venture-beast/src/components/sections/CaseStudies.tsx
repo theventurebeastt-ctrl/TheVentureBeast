@@ -36,7 +36,7 @@ export default function CaseStudies() {
 
   return (
     <section id="work" className="py-32 bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] opacity-50" />
+      <div className="absolute top-0 right-0 w-[320px] h-[320px] bg-primary/10 rounded-full blur-[64px] opacity-50" />
       
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
